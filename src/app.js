@@ -43,11 +43,29 @@ app.get('/help', (req, res) => {
 })
 
 app.get('/weather', (req, res) => {
-    if (!req.query.address) {
+    if (req.query.address === "" || !req.query.mylocation === undefined) {
         return res.send({
             error: 'You must provide an address!'
         })
     }
+
+    if (!req.query.address) {
+    const location = req.query.mylocation.split(' ')
+    console.log(location[0])
+
+    forecast.forecast(location[0], location[1], (error, {forecasData, location}) => {
+        if (error) {
+            return res.send({ error })
+        } 
+
+        res.send([{
+            forecast: forecasData,
+            location,
+            address: req.query.address
+            }]) 
+    })
+} else {
+    
     geocode.geocode(req.query.address, (error,{latitude, longitude, location} = {})  => {
         if (error){
             return res.send({error})
@@ -65,9 +83,8 @@ app.get('/weather', (req, res) => {
                 }]) 
         })
     })
+}
 })
-
-
 
 app.get('/help/*', (req, res) => {
     res.render('404',{

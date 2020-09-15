@@ -53,3 +53,27 @@ button {
     color: white;
     padding: 8px;
 }
+.compose {
+    display: flex;
+    flex-shrink: 0;
+    margin-top: 16px;
+    padding: 4px;
+}
+
+ .compose form {
+    display: flex;
+    flex-grow: 2;
+    margin-right: 2%;
+}
+
+.compose input {
+    border: 1px solid #eeeeee;
+    width: 50%;
+    padding: 1px;
+    margin: 0 0 0 0;
+    flex-grow: 1;
+}
+
+.compose button {
+    font-size: 14px;
+}  

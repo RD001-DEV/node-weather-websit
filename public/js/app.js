@@ -16,8 +16,10 @@ $sendLocationButton.addEventListener('click', (e) => {
     messageTwo.textContent = ''
 
     navigator.geolocation.getCurrentPosition((position) => {
+        const latitude = position.coords.latitude
+        const longitude = position.coords.longitude
 
-        fetch('/weather?mylocation=' + position.coords.latitude + ' ' + position.coords.longitude).then((response) => {
+        fetch('/weather?mylocation=' + latitude + ' ' + longitude).then((response) => {
             
             response.json().then((data) => {
                 if (data.error){

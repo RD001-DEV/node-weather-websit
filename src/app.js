@@ -51,7 +51,6 @@ app.get('/weather', (req, res) => {
 
     if (!req.query.address) {
     const location = req.query.mylocation.split(' ')
-    console.log(location[0])
 
     forecast.forecast(location[0], location[1], (error, {forecasData, location}) => {
         if (error) {
@@ -71,7 +70,7 @@ app.get('/weather', (req, res) => {
             return res.send({error})
         }
 
-        forecast.forecast(latitude, longitude, (error, forecasData) => {
+        forecast.forecast(latitude, longitude, (error, {forecasData}) => {
             if (error) {
                 return res.send({ error })
             } 
